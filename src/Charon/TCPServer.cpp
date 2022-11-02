@@ -93,6 +93,7 @@ namespace Charon {
 
 	TCPServer::~TCPServer()
 	{
+		ShutdownServer();
 	}
 
 	void TCPServer::StartServer()

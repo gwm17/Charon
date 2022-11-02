@@ -1,8 +1,8 @@
 add_executable(Charon)
 
 target_include_directories(Charon PRIVATE
-	./Charon
-	./vendor/asio/asio/include
+	${CMAKE_CURRENT_SOURCE_DIR}/Charon
+	${CMAKE_CURRENT_SOURCE_DIR}/vendor/asio/asio/include
 	${NSCLDAQ_DIR}/include
 )
 
@@ -11,6 +11,9 @@ target_sources(Charon PRIVATE
 	Charon/TCPServer.h
 	Charon/TCPServer.cpp
 	Charon/StygianMessage.h
+	Charon/Application.h
+	Charon/Application.cpp
+	Charon/main.cpp
 )
 
 set(THREADS_PREFER_PTHREAD_FLAG On)

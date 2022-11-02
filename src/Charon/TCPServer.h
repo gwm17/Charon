@@ -49,7 +49,7 @@ namespace Charon {
 
 		void MessageClients(const StygianMessage& message);
 
-		bool IsActive() const { m_acceptor.is_open(); }
+		bool IsActive() const { return m_acceptor.is_open(); }
 
 	private:
 		void WaitForClient();

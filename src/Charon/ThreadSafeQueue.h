@@ -14,67 +14,71 @@ namespace Charon {
 	class ThreadSafeQueue
 	{
 	public:
-		ThreadSafeQueue() = default;
+		ThreadSafeQueue() :
+			m_isForceWakeup(false)
+		{
+		}
+		
 		ThreadSafeQueue(const ThreadSafeQueue&) = delete; //no copy
 		~ThreadSafeQueue() { Clear(); }
 
 		void PushBack(const T& data)
 		{
-			std::scoped_lock<std::mutex> guard(m_queueMutex);
+			std::lock_guard<std::mutex> guard(m_queueMutex);
 			m_queue.push_back(data);
 
-			std::scoped_lock<std::mutex> condGuard(m_conditionMutex);
+			std::lock_guard<std::mutex> condGuard(m_conditionMutex);
 			m_conditional.notify_one();
 		}
 
 		void PushFront(const T& data)
 		{
-			std::scoped_lock<std::mutex> guard(m_queueMutex);
+			std::lock_guard<std::mutex> guard(m_queueMutex);
 			m_queue.push_front(data);
 
-			std::scoped_lock<std::mutex> conditionGuard(m_conditionMutex);
+			std::lock_guard<std::mutex> conditionGuard(m_conditionMutex);
 			m_conditional.notify_one();
 		}
 
 		void PopBack()
 		{
-			std::scoped_lock<std::mutex> guard(m_queueMutex);
+			std::lock_guard<std::mutex> guard(m_queueMutex);
 			m_queue.pop_back();
 		}
 
 		void PopFront()
 		{
-			std::scoped_lock<std::mutex> guard(m_queueMutex);
+			std::lock_guard<std::mutex> guard(m_queueMutex);
 			m_queue.pop_front();
 		}
 
 		const T& Front()
 		{
-			std::scoped_lock<std::mutex> guard(m_queueMutex);
+			std::lock_guard<std::mutex> guard(m_queueMutex);
 			return m_queue.front();
 		}
 
 		const T& Back()
 		{
-			std::scoped_lock<std::mutex> guard(m_queueMutex);
+			std::lock_guard<std::mutex> guard(m_queueMutex);
 			return m_queue.back();
 		}
 
 		std::size_t Size()
 		{
-			std::scoped_lock<std::mutex> guard(m_queueMutex);
+			std::lock_guard<std::mutex> guard(m_queueMutex);
 			return m_queue.size();
 		}
 
 		bool IsEmpty()
 		{
-			std::scoped_lock<std::mutex> guard(m_queueMutex);
+			std::lock_guard<std::mutex> guard(m_queueMutex);
 			return m_queue.empty();
 		}
 
 		void Clear()
 		{
-			std::scoped_lock<std::mutex> guard(m_queueMutex);
+			std::lock_guard<std::mutex> guard(m_queueMutex);
 			m_queue.clear();
 		}
 
@@ -82,13 +86,13 @@ namespace Charon {
 
 		typename std::deque<T>::iterator begin()
 		{
-			std::scoped_lock<std::mutex> guard(m_queueMutex);
+			std::lock_guard<std::mutex> guard(m_queueMutex);
 			return m_queue.begin();
 		}
 
 		typename std::deque<T>::iterator end()
 		{
-			std::scoped_lock<std::mutex> guard(m_queueMutex);
+			std::lock_guard<std::mutex> guard(m_queueMutex);
 			return m_queue.end();
 		}
 
@@ -121,7 +125,7 @@ namespace Charon {
 		std::mutex m_conditionMutex;
 		std::condition_variable m_conditional;
 
-		std::atomic<bool> m_isForceWakeup = false;
+		std::atomic<bool> m_isForceWakeup;
 	};
 }
 
