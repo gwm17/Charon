@@ -158,6 +158,7 @@ namespace Charon {
 				}
 				else
 					std::cerr << "Server Connection Failure with error code: " << ec.message() << std::endl;
+				WaitForClient();
 			});
 	}
 }

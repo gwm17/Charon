@@ -14,11 +14,6 @@ namespace Charon {
     {
     }
 
-    void Application::StartServer()
-    {
-        m_server.StartServer();
-    }
-
     void Application::Run()
     {
         if(!m_daqSource.IsActive() || !m_server.IsActive())
