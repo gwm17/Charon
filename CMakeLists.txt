@@ -13,6 +13,7 @@ project(Charon)
 
 set(CHARON_BINARY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 #assume we've installed nscldaq to the standard location
-set(NSCLDAQ_DIR /usr/opt/opt-buster/)
+set(NSCLDAQ_DIR /usr/opt/opt-buster/) # use this outside of container
+#set(NSCLDAQ_DIR /usr/opt/)
 
 add_subdirectory(src)

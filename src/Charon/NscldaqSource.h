@@ -1,15 +1,15 @@
 #ifndef NSCLDAQ_SOURCE_H
 #define NSCLDAQ_SOURCE_H
 
-#include "daq/format/DataFormat.h"
-#include "utilities/IO/CDataSourceFactory.h"
-#include "utilities/IO/CDataSource.h"
-#include "daq/format/CRingItem.h"
-#include "daq/format/CRingItemFactory.h"
-#include "daq/format/CRingStateChangeItem.h"
-#include "daq/format/CPhysicsEventItem.h"
-#include "daq/format/CRingScalerItem.h"
-#include "libtcl/include/exception/Exception.h"
+#include "DataFormat.h"
+#include "CDataSourceFactory.h"
+#include "CDataSource.h"
+#include "CRingItem.h"
+#include "CRingItemFactory.h"
+#include "CRingStateChangeItem.h"
+#include "CPhysicsEventItem.h"
+#include "CRingScalerItem.h"
+#include "Exception.h"
 
 #include <string>
 #include <vector>

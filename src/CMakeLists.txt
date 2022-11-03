@@ -4,7 +4,7 @@ target_include_directories(Charon PRIVATE
 	${CMAKE_CURRENT_SOURCE_DIR}/Charon
 	${CMAKE_CURRENT_SOURCE_DIR}/vendor/asio/asio/include
 	${NSCLDAQ_DIR}/utilities/format/
-	${NSCLDAQ_DIR}/daq/format/
+	${NSCLDAQ_DIR}/daq/current/include/
 	${NSCLDAQ_DIR}/libtcl/include/exception/
 )
 

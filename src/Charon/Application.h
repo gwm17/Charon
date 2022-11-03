@@ -13,7 +13,7 @@ namespace Charon {
         ~Application();
 
         void Run();
-
+	void StartServer();
     private:
         TCPServer m_server;
         NscldaqSource m_daqSource;

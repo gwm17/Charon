@@ -40,7 +40,7 @@ namespace Charon {
         if(ringItem == NULL) //ick
             return emptyResult;
 
-        switch(ringItem->type)
+        switch(ringItem->type())
         {
             case PHYSICS_EVENT: return HandlePhysicsEvent((CPhysicsEventItem*)ringItem);
             case BEGIN_RUN: HandleBeginRun((CRingStateChangeItem*)ringItem); break;
