@@ -13,15 +13,15 @@ namespace Charon {
 	struct StygianMessage
 	{
 		StygianMessage() = default;
-		StygianMessage(const std::vector<char>& data)
+		StygianMessage(const std::vector<uint8_t>& data)
 		{
-			size = data.size() * sizeof(char);
+			size = data.size() * sizeof(uint8_t);
 			body = data;
 		}
 
 
 		uint64_t size = 0;
-		std::vector<char> body;
+		std::vector<uint8_t> body;
 	};
 }
 
