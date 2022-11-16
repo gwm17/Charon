@@ -31,23 +31,28 @@ namespace Charon {
 
     StygianMessage NscldaqSource::GetData()
     {
-        static StygianMessage emptyResult;
+        StygianMessage result;
 
         if(m_dataSource == nullptr)
             return emptyResult;
 
-        CRingItem* ringItem = m_dataSource->getItem();
+        CRingItem* ringItem = m_dataSource->getItem(); //We own ringItem
         if(ringItem == NULL) //ick
             return emptyResult;
 
         switch(ringItem->type())
         {
-            case PHYSICS_EVENT: return HandlePhysicsEvent((CPhysicsEventItem*)ringItem);
+            case PHYSICS_EVENT:
+            {
+                result = HandlePhysicsEvent((CPhysicsEventItem*)ringItem);
+                break;
+            }
             case BEGIN_RUN: HandleBeginRun((CRingStateChangeItem*)ringItem); break;
             case END_RUN: HandleEndRun((CRingStateChangeItem*)ringItem); break;
         }
 
-        return emptyResult;
+        delete ringItem;
+        return result;
     }
 
     StygianMessage NscldaqSource::HandlePhysicsEvent(CPhysicsEventItem* item)
